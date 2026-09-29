@@ -1,0 +1,79 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Every hour at :23. Picks up new YouTube uploads without anyone touching the site.
+    - cron: "23 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.fetch.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Fetch the channel's videos from YouTube
+        id: fetch
+        run: python scripts/fetch_videos.py
+
+      - name: Save the updated video list
+        if: steps.fetch.outputs.changed == 'true'
+        run: |
+          git config user.name "tabtwelve-site"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/videos.json
+          git commit -m "Update video list from YouTube"
+          git push
+
+      - name: Build the site
+        run: python scripts/build.py
+
+      - name: Set up Pages
+        if: github.event_name != 'schedule' || steps.fetch.outputs.changed == 'true'
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload the built site
+        if: github.event_name != 'schedule' || steps.fetch.outputs.changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    if: github.event_name != 'schedule' || needs.build.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Keep the custom domain and HTTPS setting in place (best effort)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api -X PUT "repos/${{ github.repository }}/pages" -f cname=tabtwelve.com || true
+          gh api -X PUT "repos/${{ github.repository }}/pages" -F https_enforced=true || true

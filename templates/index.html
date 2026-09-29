@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}{{ site.site_name }} · {{ site.tagline }}{% endblock %}
+{% block head %}
+{% if latest %}<link rel="preload" as="image" href="{{ latest.thumb }}">{% endif %}
+{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <div class="wrap">
+    {% if latest %}
+    <div class="hero__grid">
+      <a class="hero__media frame" href="{{ latest.youtube_url }}" rel="noopener" target="_blank" aria-label="Watch {{ latest.title }} on YouTube">
+        <span class="frame__bar">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="frame__tab"><img src="/img/logo.png" alt="" width="18" height="15">{{ latest.title }}</span>
+        </span>
+        <span class="frame__media">{{ m.thumb(latest, eager=true) }}{{ m.play() }}</span>
+      </a>
+      <div class="hero__text">
+        <p class="eyebrow eyebrow--accent">Latest episode</p>
+        <h1 class="hero__title">{{ latest.title }}</h1>
+        <p class="hero__meta">Episode {{ latest.number }} &middot; {{ latest.date }}</p>
+        {% if latest.summary %}<p class="hero__summary">{{ latest.summary }}</p>{% endif %}
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="{{ latest.youtube_url }}" rel="noopener" target="_blank">Watch on YouTube</a>
+          <a class="btn btn--ghost" href="{{ latest.url }}">Sources &amp; notes</a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="hero__grid hero__grid--soon">
+      <div class="frame frame--soon" aria-hidden="true">
+        <span class="frame__bar">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="frame__tab"><img src="/img/logo.png" alt="" width="18" height="15">Episode 1</span>
+        </span>
+        <span class="frame__media frame__media--dark"><img src="/img/logo.png" alt="" width="120" height="100"></span>
+      </div>
+      <div class="hero__text">
+        <p class="eyebrow eyebrow--accent">Coming soon</p>
+        <h1 class="hero__title">The first episode is on its way.</h1>
+        <p class="hero__summary">Documentary-style deep dives, on YouTube. Subscribe and you'll see it the moment it lands.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="{{ site.subscribe_url }}" rel="noopener" target="_blank">Subscribe on YouTube</a>
+          <a class="btn btn--ghost" href="/about/">About the channel</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if episodes|length > 1 %}
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 class="section__title">All episodes</h2>
+      {% if total > episodes|length %}<a class="section__more" href="/episodes/">See all {{ total }}</a>{% endif %}
+    </div>
+    <div class="grid">
+      {% for ep in episodes %}{{ m.card(ep) }}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section section--about">
+  <div class="wrap about-strip">
+    <div>
+      <p class="eyebrow">About</p>
+      <h2 class="about-strip__title">{{ site.tagline }}</h2>
+      <p class="about-strip__text">{{ site.description }}</p>
+      <a class="link-arrow" href="/about/">More about Tab Twelve</a>
+    </div>
+    <ul class="about-strip__list" aria-label="What you get">
+      <li><strong>New episodes on YouTube.</strong> This site is the map; the videos live there.</li>
+      <li><strong>Sources for every episode.</strong> Clips, papers and articles, listed so you can go deeper.</li>
+      <li><strong>Corrections when needed.</strong> Posted on the episode page.</li>
+    </ul>
+  </div>
+</section>
+
+{% if site.newsletter.enabled and site.newsletter.form_action %}
+<section class="section section--news">
+  <div class="wrap news">
+    <div>
+      <h2 class="news__title">{{ site.newsletter.heading }}</h2>
+      <p class="news__blurb">{{ site.newsletter.blurb }}</p>
+    </div>
+    <form class="news__form" action="{{ site.newsletter.form_action }}" method="post" target="_blank">
+      <label class="visually-hidden" for="news-email">Email address</label>
+      <input id="news-email" type="email" name="{{ site.newsletter.email_field_name }}" placeholder="you@example.com" required autocomplete="email">
+      <button class="btn btn--primary" type="submit">Subscribe</button>
+    </form>
+    {% if site.newsletter.provider_note %}<p class="news__note">{{ site.newsletter.provider_note }}</p>{% endif %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

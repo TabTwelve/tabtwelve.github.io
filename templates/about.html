@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}About · {{ site.site_name }}{% endblock %}
+{% block description %}What Tab Twelve is, what the episodes cover, and how to get in touch.{% endblock %}
+{% block content %}
+<section class="section section--first">
+  <div class="wrap prose">
+    <p class="eyebrow eyebrow--accent">About</p>
+    <h1>{{ site.tagline }}</h1>
+    <p class="lead">Tab Twelve is a documentary-style YouTube channel. Each episode is a deep dive into one subject that deserves more than a headline: internet rabbit holes, unusual people, businesses, subcultures, scandals and ideas worth following further.</p>
+    <p>The episodes are built to be entertaining first and informative all the way through. They don't pick a side for you. They lay out the strongest version of each case, with the sources on the table, and let you decide.</p>
+    <h2>How this site works</h2>
+    <p>Every video lives on YouTube, and that is where they play. This site is the index: the latest episode up top, the full catalogue, and a page for each episode with the clips, articles and papers it drew on, plus any corrections after the fact.</p>
+    <h2>Sources and corrections</h2>
+    <p>Each episode page lists what was used to make it. If something is wrong, write to <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a> and it will be checked and, where needed, corrected on the episode page.</p>
+    <h2>Get in touch</h2>
+    <p>Sponsorships, press, story tips and anything else: <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>.</p>
+    <p class="socials">
+      {% for s in site.socials %}<a href="{{ s.url }}" rel="noopener me" target="_blank">{{ s.name }}</a>{% if not loop.last %} <span aria-hidden="true">&middot;</span> {% endif %}{% endfor %}
+    </p>
+    <p><a class="btn btn--primary" href="{{ site.subscribe_url }}" rel="noopener" target="_blank">Subscribe on YouTube</a></p>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Page not found · {{ site.site_name }}{% endblock %}
+{% block description %}That page doesn't exist.{% endblock %}
+{% block content %}
+<section class="section section--first">
+  <div class="wrap prose empty">
+    <p class="eyebrow eyebrow--accent">404</p>
+    <h1>This tab was closed.</h1>
+    <p class="lead">There's nothing at this address. Try the episodes, or head home.</p>
+    <p><a class="btn btn--primary" href="/episodes/">Episodes</a> <a class="btn btn--ghost" href="/">Home</a></p>
+  </div>
+</section>
+{% endblock %}

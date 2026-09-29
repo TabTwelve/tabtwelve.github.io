@@ -1,0 +1,36 @@
+{
+  "site_name": "Tab Twelve",
+  "tagline": "Deeper down the internet.",
+  "domain": "tabtwelve.com",
+  "base_url": "https://tabtwelve.com",
+  "description": "Tab Twelve is a documentary-style YouTube channel. Entertaining deep dives into interesting subjects, internet rabbit holes, unusual people, businesses, subcultures, scandals and ideas worth following further.",
+  "youtube": {
+    "handle": "Tab_Twelve",
+    "channel_id": "UCroifBx9hrlqMu7TMcLLAjA"
+  },
+  "contact_email": "info@tabtwelve.com",
+  "socials": [
+    { "name": "YouTube", "url": "https://www.youtube.com/@Tab_Twelve" },
+    { "name": "Instagram", "url": "https://www.instagram.com/tabtwelve" },
+    { "name": "TikTok", "url": "https://www.tiktok.com/@Tab_Twelve" },
+    { "name": "X", "url": "https://x.com/TabTwelve" },
+    { "name": "Threads", "url": "https://www.threads.net/@tabtwelve" }
+  ],
+  "newsletter": {
+    "enabled": false,
+    "heading": "New episodes, straight to your inbox",
+    "blurb": "One email when a new episode drops. Nothing else.",
+    "form_action": "",
+    "email_field_name": "email",
+    "provider_note": ""
+  },
+  "shop": {
+    "enabled": false,
+    "url": "/shop/"
+  },
+  "analytics": {
+    "cloudflare_token": ""
+  },
+  "hide_video_ids": [],
+  "episodes_on_home": 12
+}

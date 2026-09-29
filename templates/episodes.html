@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}Episodes · {{ site.site_name }}{% endblock %}
+{% block description %}Every Tab Twelve episode, with sources and notes. Videos play on YouTube.{% endblock %}
+{% block content %}
+<section class="section section--first">
+  <div class="wrap">
+    <div class="section__head">
+      <h1 class="section__title">Episodes</h1>
+      <p class="section__sub">{{ episodes|length }} so far. Videos play on YouTube.</p>
+    </div>
+    {% if episodes %}
+    <div class="grid">
+      {% for ep in episodes %}{{ m.card(ep) }}{% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">
+      <p>Nothing here yet. The first episode is coming soon.</p>
+      <a class="btn btn--primary" href="{{ site.subscribe_url }}" rel="noopener" target="_blank">Subscribe on YouTube</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Privacy · {{ site.site_name }}{% endblock %}
+{% block description %}What this site does and doesn't collect.{% endblock %}
+{% block content %}
+<section class="section section--first">
+  <div class="wrap prose">
+    <p class="eyebrow eyebrow--accent">Privacy</p>
+    <h1>Short version: this site doesn't track you.</h1>
+    <p class="lead">tabtwelve.com is a static site. It sets no cookies of its own, has no accounts, and runs no advertising.</p>
+    <h2>What is loaded from elsewhere</h2>
+    <ul>
+      <li><strong>Video thumbnails</strong> are loaded from YouTube's image servers (i.ytimg.com). Your browser requests them directly, so YouTube (Google) sees the request the way it would for any image on the web.</li>
+      <li><strong>Videos play on YouTube.</strong> Clicking a video takes you to youtube.com, where <a href="https://policies.google.com/privacy" rel="noopener" target="_blank">Google's privacy policy</a> applies.</li>
+      {% if site.analytics.cloudflare_token %}
+      <li><strong>Visit counts</strong> use Cloudflare Web Analytics, which is cookie-free and does not build a profile of you. <a href="https://www.cloudflare.com/web-analytics/" rel="noopener" target="_blank">How it works</a>.</li>
+      {% endif %}
+    </ul>
+    <h2>Hosting</h2>
+    <p>The site is served by GitHub Pages. Like any web host, GitHub may log the IP address of requests for security and operations. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">GitHub's privacy statement</a>.</p>
+    {% if site.newsletter.enabled %}
+    <h2>Email updates</h2>
+    <p>If you sign up for episode emails, your address is stored by the email provider that sends them and used only for those emails. Every email has an unsubscribe link.</p>
+    {% endif %}
+    <h2>Contact</h2>
+    <p>Questions about any of this: <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>.</p>
+    <p class="muted">This page will be updated if the site starts doing anything not described here, for example when a shop is added.</p>
+  </div>
+</section>
+{% endblock %}

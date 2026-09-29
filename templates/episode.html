@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m %}
+{% block title %}{{ ep.title }} · {{ site.site_name }}{% endblock %}
+{% block description %}{{ ep.summary or site.description }}{% endblock %}
+{% block ogtype %}video.other{% endblock %}
+{% block ogimage %}{{ ep.thumb }}{% endblock %}
+{% block head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": {{ ep.title|tojson }},
+  "description": {{ (ep.summary or site.description)|tojson }},
+  "thumbnailUrl": [{{ ep.thumb|tojson }}],
+  "uploadDate": {{ ep.published|tojson }},
+  "embedUrl": "https://www.youtube.com/embed/{{ ep.id }}",
+  "url": {{ ep.youtube_url|tojson }},
+  "publisher": {"@type": "Organization", "name": {{ site.site_name|tojson }}, "url": {{ site.base_url|tojson }}}
+}
+</script>
+{% endblock %}
+{% block content %}
+<article class="episode">
+  <div class="wrap episode__wrap">
+    <p class="crumbs"><a href="/episodes/">Episodes</a> <span aria-hidden="true">/</span> Episode {{ ep.number }}</p>
+    <h1 class="episode__title">{{ ep.title }}</h1>
+    <p class="episode__meta">Episode {{ ep.number }} &middot; {{ ep.date }}</p>
+
+    <a class="frame episode__media" href="{{ ep.youtube_url }}" rel="noopener" target="_blank" aria-label="Watch {{ ep.title }} on YouTube">
+      <span class="frame__bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="frame__tab"><img src="/img/logo.png" alt="" width="18" height="15">{{ ep.title }}</span>
+      </span>
+      <span class="frame__media">{{ m.thumb(ep, eager=true) }}{{ m.play() }}</span>
+    </a>
+
+    <div class="episode__actions">
+      <a class="btn btn--primary" href="{{ ep.youtube_url }}" rel="noopener" target="_blank">Watch on YouTube</a>
+      <a class="btn btn--ghost" href="{{ site.subscribe_url }}" rel="noopener" target="_blank">Subscribe</a>
+    </div>
+
+    <div class="episode__body">
+      {% if ep.summary %}<p class="episode__summary">{{ ep.summary }}</p>{% endif %}
+
+      {% if ep.chapters %}
+      <h2>Chapters</h2>
+      <ol class="chapters">
+        {% for c in ep.chapters %}
+        <li><a href="{{ ep.youtube_url }}&t={{ c.seconds }}s" rel="noopener" target="_blank"><span class="chapters__time">{{ c.time }}</span> {{ c.title }}</a></li>
+        {% endfor %}
+      </ol>
+      {% endif %}
+
+      {% if ep.notes_html %}
+      <div class="notes">{{ ep.notes_html|safe }}</div>
+      {% elif ep.description_html %}
+      <h2>Sources and credits</h2>
+      <div class="notes notes--plain">{{ ep.description_html|safe }}</div>
+      {% endif %}
+    </div>
+  </div>
+</article>
+{% endblock %}

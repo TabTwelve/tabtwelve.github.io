@@ -1,0 +1,21 @@
+{% macro thumb(ep, eager=false) %}
+<img class="thumb" src="{{ ep.thumb }}" alt="" width="1280" height="720" {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='{{ ep.thumb_fallback }}'}">
+{% endmacro %}
+
+{% macro play() %}
+<span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M8 5.5v13l11-6.5z"/></svg></span>
+{% endmacro %}
+
+{% macro card(ep) %}
+<article class="card">
+  <a class="card__media frame frame--sm" href="{{ ep.youtube_url }}" rel="noopener" target="_blank" aria-label="Watch {{ ep.title }} on YouTube">
+    <span class="frame__bar"><span class="dots"><i></i><i></i><i></i></span></span>
+    <span class="frame__media">{{ thumb(ep) }}{{ play() }}</span>
+  </a>
+  <div class="card__body">
+    <p class="eyebrow">Episode {{ ep.number }} &middot; {{ ep.date }}</p>
+    <h3 class="card__title"><a href="{{ ep.youtube_url }}" rel="noopener" target="_blank">{{ ep.title }}</a></h3>
+    <a class="card__notes" href="{{ ep.url }}">Sources &amp; notes</a>
+  </div>
+</article>
+{% endmacro %}
