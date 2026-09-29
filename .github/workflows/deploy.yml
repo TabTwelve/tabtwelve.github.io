@@ -47,6 +47,13 @@ jobs:
       - name: Build the site
         run: python scripts/build.py
 
+      - name: Make sure Pages deploys from this workflow, not the legacy branch build
+        if: github.event_name != 'schedule' || steps.fetch.outputs.changed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/pages" -f build_type=workflow
+
       - name: Set up Pages
         if: github.event_name != 'schedule' || steps.fetch.outputs.changed == 'true'
         uses: actions/configure-pages@v5
