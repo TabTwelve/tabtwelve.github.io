@@ -13,6 +13,7 @@
     <span class="frame__media">{{ thumb(ep) }}{{ play() }}</span>
   </a>
   <div class="card__body">
+    <span class="card__num" aria-hidden="true">{{ '%02d' % ep.number if ep.number is number else ep.number }}</span>
     <p class="eyebrow">Episode {{ ep.number }} &middot; {{ ep.date }}</p>
     <h3 class="card__title"><a href="{{ ep.youtube_url }}" rel="noopener" target="_blank">{{ ep.title }}</a></h3>
     <a class="card__notes" href="{{ ep.url }}">Sources &amp; notes</a>

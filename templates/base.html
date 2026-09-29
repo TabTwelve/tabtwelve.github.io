@@ -13,7 +13,10 @@
   <meta property="og:description" content="{{ self.description() }}">
   <meta property="og:image" content="{% block ogimage %}{{ site.base_url }}/img/og-default.jpg{% endblock %}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#161616">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
   <link rel="icon" href="/img/favicon.ico" sizes="32x32">
   <link rel="icon" href="/img/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
@@ -29,7 +32,7 @@
     <div class="wrap nav__inner">
       <a class="brand" href="/" aria-label="{{ site.site_name }} home">
         <img class="brand__mark" src="/img/logo.png" alt="" width="42" height="35">
-        <img class="brand__word" src="/img/wordmark.png" alt="{{ site.site_name }}" width="184" height="20">
+        <img class="brand__word" src="/img/wordmark-white.png" alt="{{ site.site_name }}" width="184" height="20">
       </a>
       <nav class="nav__links" aria-label="Primary">
         <a href="/episodes/">Episodes</a>
@@ -48,6 +51,7 @@
   </main>
 
   <footer class="footer">
+    <img class="footer__ghost" src="/img/logo.png" alt="" aria-hidden="true" width="340" height="284">
     <div class="wrap footer__inner">
       <div class="footer__brand">
         <img src="/img/wordmark-white.png" alt="{{ site.site_name }}" width="184" height="20">
