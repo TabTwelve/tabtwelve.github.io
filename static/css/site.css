@@ -204,15 +204,6 @@ a.frame:hover .play { transform: translate(-50%, -50%) scale(1.1); background: v
   .hero__grid { grid-template-columns: 1fr; gap: 30px; }
 }
 
-/* ---------- ticker ---------- */
-.ticker { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); overflow: hidden; padding: 14px 0; }
-.ticker__track { display: flex; width: max-content; animation: ticker 60s linear infinite; }
-.ticker__track:hover { animation-play-state: paused; }
-.ticker__group { display: flex; align-items: center; gap: 0; padding-right: 0; }
-.ticker__group span { display: inline-flex; align-items: center; gap: 18px; padding-right: 18px; font-size: 13px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
-.ticker__group span::after { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-@keyframes ticker { to { transform: translateX(-50%); } }
-
 /* ---------- sections ---------- */
 .section { padding: 72px 0; }
 .section--first { padding-top: 48px; }
