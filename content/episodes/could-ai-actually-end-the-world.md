@@ -1,6 +1,6 @@
 ---
-video_id: TBD
-slug: could-ai-actually-end-the-world
+video_id: 63dPnhOzUlU
+slug: could-ai-end-the-world
 episode: 1
 ---
 ## Sources
@@ -8,13 +8,39 @@ episode: 1
 ### News clips (short excerpts, used for commentary)
 
 - BBC, Sunday with Laura Kuenssberg, 13 Sep 2026. [youtube.com/watch?v=9norxWsFrOo](https://www.youtube.com/watch?v=9norxWsFrOo)
-- CNN, interview with Jacob Coxon, 9 Sep 2026. [youtube.com/watch?v=i30jVPqQeOM](https://www.youtube.com/watch?v=i30jVPqQeOM)
+- CNN, Anderson Cooper interview with Jacob Coxon, 9 Sep 2026. [youtube.com/watch?v=i30jVPqQeOM](https://www.youtube.com/watch?v=i30jVPqQeOM)
 - NBC News NOW, Top Story with Tom Llamas, 9 Sep 2026. [youtube.com/watch?v=Dy2kbPEwoi4](https://www.youtube.com/watch?v=Dy2kbPEwoi4)
 - NBC, Meet the Press with Kristen Welker, 13 Sep 2026. [youtube.com/watch?v=cFOgef5x_ag](https://www.youtube.com/watch?v=cFOgef5x_ag)
 - Fox News, Special Report with Bret Baier, 9 Sep 2026. [youtube.com/watch?v=9mhq2vCxWjg](https://www.youtube.com/watch?v=9mhq2vCxWjg)
 - CBS News, "How AI could destroy all humanity", 10 Sep 2026. [youtube.com/watch?v=yaVtCQ3Qnbc](https://www.youtube.com/watch?v=yaVtCQ3Qnbc)
 - BBC News, Trump dismisses AI warnings, 13 Sep 2026. [youtube.com/watch?v=K9-h8e2uxPQ](https://www.youtube.com/watch?v=K9-h8e2uxPQ)
 - Associated Press, Trump in Doonbeg, 14 Sep 2026. [youtube.com/watch?v=_RZO0qV7b-s](https://www.youtube.com/watch?v=_RZO0qV7b-s)
+
+### The warning signs
+
+- Palisade Research, o3 shutdown tests, May 2025. [x.com](https://x.com/PalisadeAI/status/1926084635903025621)
+- Anthropic, Agentic Misalignment, Jun 2025. [anthropic.com](https://www.anthropic.com/research/agentic-misalignment)
+- Anthropic, AI espionage campaign, Nov 2025. [anthropic.com](https://www.anthropic.com/news/disrupting-AI-espionage)
+
+### 1. Losing control
+
+- OpenAI, Faulty reward functions in the wild, Dec 2016. [openai.com](https://openai.com/index/faulty-reward-functions/)
+- Apollo Research, o1 scheming tests, Dec 2024. [apolloresearch.ai](https://www.apolloresearch.ai/science/frontier-models-are-capable-of-incontext-scheming)
+
+### 2. Misuse
+
+- International AI Safety Report 2026. [internationalaisafetyreport.org](https://internationalaisafetyreport.org/publication/2026-report-executive-summary)
+- FBI, AI scams in the IC3 report, Apr 2026. [fbi.gov](https://www.fbi.gov/news/press-releases/cryptocurrency-and-ai-scams-bilk-americans-of-billions)
+- CNN, Hong Kong deepfake video call scam, Feb 2024. [cnn.com](https://www.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk)
+- Anthropic, ASL-3 safeguards, May 2025. [anthropic.com](https://www.anthropic.com/news/activating-asl3-protections)
+- RAND, AI and biological attacks red-team study, Jan 2024. [rand.org](https://www.rand.org/pubs/research_reports/RRA2977-2.html)
+
+### 3. Slow damage
+
+- IMF, AI and the global economy, Jan 2024. [imf.org](https://www.imf.org/en/Blogs/Articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity)
+- MIT News, Most work is new work, Apr 2024. [news.mit.edu](https://news.mit.edu/2024/most-work-is-new-work-us-census-data-shows-0401)
+- IEA, Energy and AI, Apr 2025. [iea.org](https://www.iea.org/reports/energy-and-ai/executive-summary)
+- NPR, the Tesla deepfake argument, May 2023. [npr.org](https://www.npr.org/2023/05/08/1174132413/people-are-trying-to-claim-real-videos-are-deepfakes-the-courts-are-not-amused)
 
 ### What could we gain?
 

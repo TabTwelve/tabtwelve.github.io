@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """Fetch the channel's public videos from YouTube's RSS feed into data/videos.json.
 
-No API key needed. The feed lists the 15 most recent public uploads. If the
-fetch fails for any reason the existing data/videos.json is left untouched, so
-a YouTube hiccup never blanks the site.
+No API key needed. It reads the channel's long-form uploads feed (the UULF
+playlist), so Shorts stay off the site. They are promos for an episode, not
+episodes, and they would otherwise push the episode out of the "latest" slot.
+If that feed can't be read it falls back to the full channel feed and drops
+anything whose link is a /shorts/ URL. Each feed lists the 15 most recent
+public uploads. If the fetch fails for any reason the existing data/videos.json
+is left untouched, so a YouTube hiccup never blanks the site.
 
 When run inside GitHub Actions it writes `changed=true|false` to $GITHUB_OUTPUT
 so the workflow can skip a redeploy when nothing is new.
@@ -47,6 +51,14 @@ def resolve_channel_id() -> str:
     return m.group(1)
 
 
+def feed_urls(cid: str) -> list[str]:
+    """Long-form uploads first, then the whole channel as a fallback."""
+    return [
+        f"https://www.youtube.com/feeds/videos.xml?playlist_id=UULF{cid[2:]}",
+        f"https://www.youtube.com/feeds/videos.xml?channel_id={cid}",
+    ]
+
+
 def parse_feed(xml_bytes: bytes) -> list[dict]:
     root = ET.fromstring(xml_bytes)
     videos = []
@@ -54,6 +66,9 @@ def parse_feed(xml_bytes: bytes) -> list[dict]:
         vid = entry.findtext("yt:videoId", default="", namespaces=NS).strip()
         if not vid:
             continue
+        link = entry.find("atom:link", NS)
+        if link is not None and "/shorts/" in link.get("href", ""):
+            continue  # a Short, not an episode
         group = entry.find("media:group", NS)
         desc = ""
         thumb = ""
@@ -89,8 +104,18 @@ def main() -> int:
     old_text = DATA.read_text(encoding="utf-8") if DATA.exists() else None
     try:
         cid = resolve_channel_id()
-        feed = http_get(f"https://www.youtube.com/feeds/videos.xml?channel_id={cid}")
-        videos = parse_feed(feed)
+        videos: list[dict] = []
+        errors: list[str] = []
+        for url in feed_urls(cid):
+            try:
+                videos = parse_feed(http_get(url))
+            except Exception as exc:  # noqa: BLE001
+                errors.append(f"{url} ({exc})")
+                continue
+            if videos:
+                break
+        if not videos and errors:
+            raise RuntimeError("; ".join(errors))
     except Exception as exc:  # noqa: BLE001
         print(f"WARNING: could not fetch the YouTube feed ({exc}). Keeping the existing video list.", file=sys.stderr)
         if old_text is None:

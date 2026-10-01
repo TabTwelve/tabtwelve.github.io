@@ -4,7 +4,7 @@ The Tab Twelve website. A small static site: latest episode, catalogue, one page
 
 ## How it stays up to date
 
-Nothing to do after uploading a video. A GitHub Action runs every hour, reads the channel's public RSS feed, and rebuilds the site if there is anything new. It also runs on every push to `main`.
+Nothing to do after uploading a video. A GitHub Action runs every hour, reads the channel's public RSS feed, and rebuilds the site if there is anything new. It also runs on every push to `main`. Shorts are left out (the Action reads the long-form uploads feed), so only full episodes show up.
 
 ## Layout
 
