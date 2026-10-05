@@ -4,8 +4,11 @@ on:
   push:
     branches: [main]
   schedule:
-    # Every hour at :23. Picks up new YouTube uploads without anyone touching the site.
-    - cron: "23 * * * *"
+    # Once a week, Thursday at 02:23 UTC. That is Wednesday night in Toronto
+    # (10:23 pm in summer, 9:23 pm in winter), a few hours after the usual
+    # Wednesday 4 to 6 pm upload. Picks up the new video without anyone touching
+    # the site. After an off-schedule upload, run it by hand from the Actions tab.
+    - cron: "23 2 * * 4"
   workflow_dispatch:
 
 permissions:

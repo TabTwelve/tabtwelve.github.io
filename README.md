@@ -4,7 +4,7 @@ The Tab Twelve website. A small static site: latest episode, catalogue, one page
 
 ## How it stays up to date
 
-Nothing to do after uploading a video. A GitHub Action runs every hour, reads the channel's public RSS feed, and rebuilds the site if there is anything new. It also runs on every push to `main`. Shorts are left out (the Action reads the long-form uploads feed), so only full episodes show up.
+Nothing to do after a Wednesday upload. A GitHub Action runs once a week, on Wednesday night Toronto time, reads the channel's public RSS feed, and rebuilds the site if there is anything new. It also runs on every push to `main`, and it can be run by hand from the Actions tab (Build and deploy, Run workflow) after an off-schedule upload. Shorts are left out (the Action reads the long-form uploads feed), so only full episodes show up.
 
 ## Layout
 
@@ -17,7 +17,7 @@ Nothing to do after uploading a video. A GitHub Action runs every hour, reads th
 | `static/` | CSS, images, favicon, robots.txt, CNAME. Copied to the site root as is |
 | `scripts/fetch_videos.py` | Pulls the YouTube feed into `data/videos.json` |
 | `scripts/build.py` | Renders everything into `dist/` |
-| `.github/workflows/deploy.yml` | Hourly fetch, build and deploy to GitHub Pages |
+| `.github/workflows/deploy.yml` | Weekly fetch, build and deploy to GitHub Pages |
 
 ## Adding sources and notes for an episode
 

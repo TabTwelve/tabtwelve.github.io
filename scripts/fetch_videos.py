@@ -78,7 +78,7 @@ def parse_feed(xml_bytes: bytes) -> list[dict]:
             if t is not None:
                 thumb = t.get("url", "")
         # View counts and "updated" stamps are left out on purpose: they change
-        # constantly and would make every hourly run look like new content.
+        # constantly and would make every scheduled run look like new content.
         videos.append(
             {
                 "id": vid,
